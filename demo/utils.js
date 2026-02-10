@@ -4,4 +4,7 @@
  const multi = (a,b)=>{
     return a*b;
 }
-module.exports = { greet, multi };
+const add = (a,b)=>{
+    return a+b;
+}
+module.exports = { greet, multi, add };

@@ -23,10 +23,13 @@
 // const absolutePath = path.resolve('./demo.txt');
 // console.log('Absolute path:', absolutePath);
 
-const {greet,multi} = require('./utils.js');
+const {greet,multi,add} = require('./utils.js');
 const name = 'Sumit';
 console.log(greet(name));
 
 const multiply=multi(5,10);
 console.log('Multiplication result:', multiply);
+
+const addition=add(5,10);
+console.log('Addition result:', addition);
     
