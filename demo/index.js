@@ -48,20 +48,15 @@
 // }
 // a();
 
-const a=()=>{
+// 
 
-};
-const b=()=>{
-    setTimeout(()=>{
-        console.log("async function2");
-    },0);
-    console.log("b");
-    Promise.resolve().then(()=>{
-        console.log("async fun 3");
-    });
-    Promise.resolve().then(()=>{
-    console.log("async fun 4");
-    });
+
+const fetchData = (a,b,cb) => {
+    cb(`${a+b}"Function 1 completed`);
 }
-a();
-b();
+const function2 = (data) => {
+
+    console.log("Function 2 received data:", data);
+
+}
+fetchData(2,2, function2);
