@@ -23,13 +23,24 @@
 // const absolutePath = path.resolve('./demo.txt');
 // console.log('Absolute path:', absolutePath);
 
-const {greet,multi,add} = require('./utils.js');
-const name = 'Sumit';
-console.log(greet(name));
+// const {greet,multi,add} = require('./utils.js');
+// const name = 'Sumit';
+// console.log(greet(name));
 
-const multiply=multi(5,10);
-console.log('Multiplication result:', multiply);
+// const multiply=multi(5,10);
+// console.log('Multiplication result:', multiply);
 
-const addition=add(5,10);
-console.log('Addition result:', addition);
-    
+// const addition=add(5,10);
+// console.log('Addition result:', addition);
+const a = ()=>{
+    b();
+    console.log("~a ~a:");
+}
+const b = ()=>{
+    c();
+    console.log("~b ~b:");
+}
+const c = ()=>{
+    console.log("~c ~c:");
+}
+a();
