@@ -32,15 +32,36 @@
 
 // const addition=add(5,10);
 // console.log('Addition result:', addition);
-const a = ()=>{
-    b();
-    console.log("~a ~a:");
-}
-const b = ()=>{
-    c();
-    console.log("~b ~b:");
-}
-const c = ()=>{
-    console.log("~c ~c:");
+// const a = ()=>{
+//     setTimeout(()=>{
+//         console.log("async function1");
+        
+//     },10000);
+//     setTimeout(()=>{
+//         console.log("async function2");
+//     },0);
+//     b();
+//     console.log("a");
+// }
+// const b = ()=>{
+//     console.log("b");
+// }
+// a();
+
+const a=()=>{
+
+};
+const b=()=>{
+    setTimeout(()=>{
+        console.log("async function2");
+    },0);
+    console.log("b");
+    Promise.resolve().then(()=>{
+        console.log("async fun 3");
+    });
+    Promise.resolve().then(()=>{
+    console.log("async fun 4");
+    });
 }
 a();
+b();
