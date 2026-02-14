@@ -52,11 +52,14 @@
 
 
 const fetchData = (a,b,cb) => {
-    cb(`${a+b}"Function 1 completed`);
+    cb(`${a+b}"Function 1 has processed the data."`);
 }
 const function2 = (data) => {
 
-    console.log("Function 2 received data:", data);
+    console.log("Function 2 received data: ", data);
 
 }
+// Calling function1 and passing function2 as a callback
+
+
 fetchData(2,2, function2);

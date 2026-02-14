@@ -7,4 +7,14 @@
 const add = (a,b)=>{
     return a+b;
 }
-module.exports = { greet, multi, add };
+const fetchData = (a,b,cb) => {
+    cb(`${a+b}"Function 1 has processed the data."`);
+}
+const function2 = (data) => {
+
+    console.log("Function 2 received data: ", data);
+}
+
+
+module.exports = { greet, multi, add, fetchData, function2 };
+
