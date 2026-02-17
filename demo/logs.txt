@@ -1,0 +1,3 @@
+url: /about, Method: GET
+url: /about, Method: GET
+url: /contact, Method: GET

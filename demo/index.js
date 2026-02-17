@@ -117,7 +117,38 @@
 // }
  
 
-const https = require("https");
+const http = require("http");
+const fs = require("fs");
 
+const server = http.createServer((req, res)=>{
 
+    const requestUrl = req.url;
+    console.log("Received request for URL: ", requestUrl);
+    const requestmethod = req.method;
+    console.log("Request method: ", requestmethod);
 
+    const logContent = `url: ${requestUrl}, Method: ${requestmethod}\n`;
+
+    fs.appendFile("logs.txt", logContent, (err) => {
+        if (err) console.error("Error writing to logs:", err);
+    });
+
+    if(requestUrl === "/"){
+        res.end("Welcome to the home page!");
+    }
+    else if(requestUrl === "/about"){
+        res.end("This is the about page.");
+    }
+    else if(requestUrl === "/contact"){
+        res.end("This is the contact page.");
+    
+    }
+    else{
+        res.statusCode = 404;
+        res.end("Page not found.");
+    }
+    // console.log("Received request: ", req);
+    // res.end("Hello, this is a response from the server!",);
+});
+
+server.listen(3000);
