@@ -51,15 +51,73 @@
 // 
 
 
-const fetchData = (a,b,cb) => {
-    cb(`${a+b}"Function 1 has processed the data."`);
-}
-const function2 = (data) => {
+// const fetchData = (a,b,cb) => {
+//     cb(`${a+b}"Function 1 has processed the data."`);
+// }
+// const function2 = (data) => {
 
-    console.log("Function 2 received data: ", data);
+//     console.log("Function 2 received data: ", data);
 
-}
-// Calling function1 and passing function2 as a callback
+// }
+// // Calling function1 and passing function2 as a callback
 
 
-fetchData(2,2, function2);
+// fetchData(2,2, function2);
+
+// const {greet,multi,add,fetchData,function2} = require('./utils.js');
+
+// const name = 'Sumit';
+// console.log(greet(name));
+
+// const multiply=multi(5,10);
+// console.log('Multiplication result:', multiply);
+
+// const addition=add(5,10);
+// console.log('Addition result:', addition);
+
+
+// fetchData(2,2, function2);  
+
+
+
+// https://www.amazon.in/mobile-phones/b/?ie=UTF8&node=1389401031&ref_=nav_cs_mobiles
+//protocol: https
+//domain: amazon.in
+// path: /mobile-phones/b/?ie=UTF8&node=1389401031&ref_=nav_cs_mobiles
+//query parameters: ie=UTF8, node=1389401031, ref_=nav_cs_mobiles
+
+
+// [
+//     "node",
+//     "index.js",
+//     "add",
+//     "1",
+//     "2",
+// ]
+
+// const functionName = process.argv[2];
+// const a = parseInt(process.argv[3]);
+// const b = parseInt(process.argv[4]);
+ 
+// console.log("arguments: " + a,b) ;
+
+// const [ , , functionName, a, b] = process.argv;
+
+// console.log("function name",functionName);
+
+// console.log("value1",a);
+// console.log("value2",b);
+
+// if(functionName === "add"){
+//     console.log("Addition result:",a+b);
+// }
+
+// if(functionName === "multi"){
+//     console.log("Multiplication result:", a*b);
+// }
+ 
+
+const https = require("https");
+
+
+
