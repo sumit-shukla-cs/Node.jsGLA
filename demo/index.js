@@ -143,9 +143,27 @@ const server = http.createServer((req, res)=>{
         res.end("This is the contact page.");
     
     }
+    else if (requestUrl === "/data"){
+        const data = {
+            name: "Sumit",
+            age: 30,
+        };
+        res.setHeader("Content-Type", "application/json");
+        res.statusCode = 200;
+        res.end(JSON.stringify(data));
+    }
+    else if(requestUrl === "/file"){
+        fs.readFile("demo.txt", "utf8", (err, data) => {
+            if(err){
+                res.statusCode = 500;
+                res.end("Error reading file.");
+            }
+        });
+    }
     else{
-        res.statusCode = 404;
-        res.end("Page not found.");
+        res.setHeader("Content-Type", "text/plain");
+        res.statusCode = 200;
+        res.end(data);
     }
     // console.log("Received request: ", req);
     // res.end("Hello, this is a response from the server!",);
