@@ -81,10 +81,10 @@
 
 
 // https://www.amazon.in/mobile-phones/b/?ie=UTF8&node=1389401031&ref_=nav_cs_mobiles
-//protocol: https
-//domain: amazon.in
+// protocol: https
+// domain: amazon.in
 // path: /mobile-phones/b/?ie=UTF8&node=1389401031&ref_=nav_cs_mobiles
-//query parameters: ie=UTF8, node=1389401031, ref_=nav_cs_mobiles
+// query parameters: ie=UTF8, node=1389401031, ref_=nav_cs_mobiles
 
 
 // [
@@ -117,38 +117,49 @@
 // }
  
 
-const http = require("http");
-const fs = require("fs");
+// const http = require("http");
+// const fs = require("fs");
 
-const server = http.createServer((req, res)=>{
+// const server = http.createServer((req, res)=>{
 
-    const requestUrl = req.url;
-    console.log("Received request for URL: ", requestUrl);
-    const requestmethod = req.method;
-    console.log("Request method: ", requestmethod);
+//     const requestUrl = req.url;
+//     console.log("Received request for URL: ", requestUrl);
+//     const requestmethod = req.method;
+//     console.log("Request method: ", requestmethod);
 
-    const logContent = `url: ${requestUrl}, Method: ${requestmethod}\n`;
+//     const logContent = `url: ${requestUrl}, Method: ${requestmethod}\n`;
 
-    fs.appendFile("logs.txt", logContent, (err) => {
-        if (err) console.error("Error writing to logs:", err);
-    });
+//     fs.appendFile("logs.txt", logContent, (err) => {
+//         if (err) console.error("Error writing to logs:", err);
+//     });
 
-    if(requestUrl === "/"){
-        res.end("Welcome to the home page!");
-    }
-    else if(requestUrl === "/about"){
-        res.end("This is the about page.");
-    }
-    else if(requestUrl === "/contact"){
-        res.end("This is the contact page.");
+//     if(requestUrl === "/"){
+//         res.end("Welcome to the home page!");
+//     }
+//     else if(requestUrl === "/about"){
+//         res.end("This is the about page.");
+//     }
+//     else if(requestUrl === "/contact"){
+//         res.end("This is the contact page.");
     
-    }
-    else{
-        res.statusCode = 404;
-        res.end("Page not found.");
-    }
-    // console.log("Received request: ", req);
-    // res.end("Hello, this is a response from the server!",);
-});
+//     }
+//     else{
+//         res.statusCode = 404;
+//         res.end("Page not found.");
+//     }
+//     // console.log("Received request: ", req);
+//     // res.end("Hello, this is a response from the server!",);
+// });
 
-server.listen(3000);
+// server.listen(3000);
+
+
+const express  = require("express")
+const app=express();
+const userRoutes =  require("./routes/userRoutes");
+app.use('/',userRoutes);
+
+app.listen(3000,()=>{
+    console.log("server is running on port 3000");
+
+});
