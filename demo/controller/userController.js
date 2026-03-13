@@ -3,14 +3,23 @@ const users = require('../modules/userModules')
 const getUsers = (req, res) => {
     res.json(users)
 }
-const getUserById = (req, res) => {
-    const id = parseInt(req.params.id);
-    const user = users.find(u => u.id === id);
-    if (user) {
-        res.json(user);
-    } else {
-        res.status(404).json({ message: 'User not found' });
-    }
+
+exports.addUser = (req,res)=>{
+    console.log("res:",req.body)
+    res.json(req.body)
 };
 
-module.exports = { getUsers, getUserById }
+exports.getUserById=(req,res)=>{
+    const userId = req.params.id;
+    let user = {};
+    users.map((userDetails)=>{
+        id=userDetails['id'];
+        if(id==userId){
+            user=userDetails;
+        }
+    });
+
+}
+
+
+module.exports = { getUsers}
