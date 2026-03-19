@@ -10,11 +10,23 @@ exports.addUser = (req, res) => {
 }
 
 exports.getUserById = (req, res) => {
-    const userId = req.params.id;
-    
-    const user = users.find(u => u.id == userId);
+    const {department,section}=req.params;
+    console.log('section',section);
+    console.log("department",department);
 
-    res.json(user);
+    res.status(200).json({
+        user:user,
+        name,
+    });
+
+}
+exports.addUsers=(req,res)=>{
+    const students = req.body;
+    console.log('students',students);
+    res.json({
+        message:"Students added successfully",
+        students,
+    })
 }
 
 // GET /get/products
