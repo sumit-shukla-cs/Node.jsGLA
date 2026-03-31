@@ -1,0 +1,15 @@
+<!-- <h1>welcome to <%= universityName %></h1>
+
+<h2>Welcome to the home page</h2>
+
+<ol>
+    <% students.forEach(student => { %>
+        <li>
+            <%= student.name %>
+        </li>
+    <% }) %>
+</ol> -->
+
+<% - include("header", { header: homePageContent.header }) %>
+<% - include("content", { content: homePageContent.content }) %>
+<% - include("footer", { footer: homePageContent.footer }) %>
