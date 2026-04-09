@@ -1,12 +1,13 @@
-const products = [
-    {
-        id: 1,
-        name: "Sample Product 1",
-    },
-    {
-        id: 2,
-        name: "Sample Product 2",
-    },
-];
+const mongoose = require("mongoose");
 
-module.exports = products;
+const productSchema = new mongoose.Schema({
+    name: String,
+    price: Number,
+    category: String,
+    description: String,
+    inStock: Boolean,
+    quantity: Number,
+});
+
+const Product = mongoose.model("Product", productSchema, "products");
+module.exports = Product;

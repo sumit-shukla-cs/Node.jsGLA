@@ -1,22 +1,18 @@
-users=[
-    {
-        id:1,
-        name:'sample1',
+const mongoose = require("mongoose");
+const userSchema = new mongoose.Schema({
+    _id: Number,
+    name: String,
+    age: Number,
+    skills: [String],
+    address: {
+        city: String,
+        pincode: Number,
+        state: String,
+        country: String,
     },
-     {
-        id:2,
-        name:'sample2',
-    },
-     {
-        id:3,
-        name:'sample3',
-    },
-     {
-        id:4,
-        name:'sample4',
-    }
+    isActive: Boolean,
+    marks: [{ subject: String, score: Number }],
+});
 
-
-];
-
-module.exports=users;
+const User = mongoose.model("User", userSchema, "myUsers");
+module.exports = User;
