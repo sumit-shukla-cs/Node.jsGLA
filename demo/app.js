@@ -1,7 +1,11 @@
-const express = require('express') 
+const express = require('express');
 const app = express();
+const authRoutes = require("./routes/authRoutes");
+const productRoutes = require("./routes/productRoutes");
+const userRoutes = require("./routes/userRoutes");
 
 app.set("view engine","ejs");
+app.use(express.json());
 
 const homePageContent = {
     header: "GLA header",
@@ -17,11 +21,17 @@ const homePageContent = {
 }
 
 app.get("/", (req, res) => {
-    res.render("home", homePageContent);
+    res.render("home", {
+        header: homePageContent.header,
+        content: homePageContent.content,
+        footer: homePageContent.footer,
+        universityName: homePageContent.data.universityName,
+        students: homePageContent.data.students,
+    });
 });
 
 app.get("/header", (req, res) => {
-    res.render("header", { title: homePageContent.header });
+    res.render("header", { header: homePageContent.header });
 });
 
 app.get("/footer", (req, res) => {
@@ -32,9 +42,8 @@ app.get("/content", (req, res) => {
     res.render("content", { content: homePageContent.content });
 });
 
-const userRoutes = require("./routes/userRoutes");
-
-app.use(express.json());
-app.use('/users', userRoutes);
+app.use("/auth", authRoutes);
+app.use("/products", productRoutes);
+app.use("/users", userRoutes);
 
 module.exports = app;

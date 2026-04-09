@@ -1,4 +1,3 @@
-export const fun = (a,b)=>{
-    console.log(a+b);
+const fun = (a, b) => a + b;
 
-}
+module.exports = { fun };
