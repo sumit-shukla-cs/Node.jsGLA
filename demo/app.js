@@ -1,49 +1,40 @@
 const express = require('express');
 const app = express();
-const authRoutes = require("./routes/authRoutes");
-const productRoutes = require("./routes/productRoutes");
-const userRoutes = require("./routes/userRoutes");
 
-app.set("view engine","ejs");
 app.use(express.json());
 
-const homePageContent = {
-    header: "GLA header",
-    content: "GLA content",
-    footer: "GLA footer",
-    data: {
-        universityName: "GLA University",
-        students: [
-            { name: "Sumit", dept: "CSE" },
-            { name: "Rahul", dept: "ECE" },
-        ]
-    }
+// Health check route
+app.get('/test', (req, res) => {
+  res.json({ message: "Server is working!" });
+});
+
+app.get('/health', (req, res) => {
+  res.json({ status: "OK" });
+});
+
+// Load and register routes with error handling
+try {
+  const userRoutes = require("./routes/userRoutes");
+  app.use("/users", userRoutes);
+  console.log(" User routes loaded");
+} catch (err) {
+  console.error(" Error loading user routes:", err.message);
 }
 
-app.get("/", (req, res) => {
-    res.render("home", {
-        header: homePageContent.header,
-        content: homePageContent.content,
-        footer: homePageContent.footer,
-        universityName: homePageContent.data.universityName,
-        students: homePageContent.data.students,
-    });
-});
+try {
+  const productRoutes = require("./routes/productRoutes");
+  app.use("/products", productRoutes);
+  console.log("Product routes loaded");
+} catch (err) {
+  console.error("Error loading product routes:", err.message);
+}
 
-app.get("/header", (req, res) => {
-    res.render("header", { header: homePageContent.header });
-});
-
-app.get("/footer", (req, res) => {
-    res.render("footer", { footer: homePageContent.footer });
-});
-
-app.get("/content", (req, res) => {
-    res.render("content", { content: homePageContent.content });
-});
-
-app.use("/auth", authRoutes);
-app.use("/products", productRoutes);
-app.use("/users", userRoutes);
+try {
+  const authRoutes = require("./routes/authRoutes");
+  app.use("/auth", authRoutes);
+  console.log("Auth routes loaded");
+} catch (err) {
+  console.error("Error loading auth routes:", err.message);
+}
 
 module.exports = app;

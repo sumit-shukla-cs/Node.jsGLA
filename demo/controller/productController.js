@@ -6,50 +6,57 @@ const getNextId = (collection) => (
         : 1
 );
 
-exports.getProducts = (req, res) => {
-    res.json(products);
-};
-
-exports.getProductById = (req, res) => {
-    const productId = Number(req.params.id);
-    const product = products.find((item) => Number(item.id) === productId);
-
-    if (!product) {
-        return res.status(404).json({ message: "Product not found" });
+exports.getProducts = async (req, res) => {
+    try {
+        const allProducts = await products.find();
+        res.json(allProducts);
+    } catch (err) {
+        res.status(500).json({ message: "Error fetching products", error: err });
     }
-
-    return res.status(200).json(product);
 };
 
-exports.addProduct = (req, res) => {
+exports.getProductById = async (req, res) => {
+    try {
+        const productId = req.params.id;
+        const product = await products.findById(productId);
+
+        if (!product) {
+            return res.status(404).json({ message: "Product not found" });
+        }
+
+        return res.status(200).json(product);
+    } catch (err) {
+        return res.status(500).json({ message: "Error fetching product", error: err });
+    }
+};
+
+exports.addProduct = async (req, res) => {
     const productData = req.body;
 
     if (!productData || Object.keys(productData).length === 0) {
         return res.status(400).json({ message: "Product data is required" });
     }
 
-    const newProduct = {
-        id: getNextId(products),
-        ...productData,
-    };
-
-    products.push(newProduct);
-    return res.status(201).json(newProduct);
+    try {
+        const newProduct = new products(productData);
+        await newProduct.save();
+        return res.status(201).json(newProduct);
+    } catch (err) {
+        return res.status(400).json({ message: "Error adding product", error: err });
+    }
 };
 
-exports.deleteProduct = (req, res) => {
-    const productId = Number(req.params.id);
-    const productIndex = products.findIndex(
-        (item) => Number(item.id) === productId
-    );
+exports.deleteProduct = async (req, res) => {
+    try {
+        const productId = req.params.id;
+        const deletedProduct = await products.findByIdAndDelete(productId);
 
-    if (productIndex === -1) {
-        return res.status(404).json({ message: "Product not found" });
+        if (!deletedProduct) {
+            return res.status(404).json({ message: "Product not found" });
+        }
+
+        return res.status(200).json({ message: "Product deleted", product: deletedProduct });
+    } catch (err) {
+        return res.status(500).json({ message: "Error deleting product", error: err });
     }
-
-    const [deletedProduct] = products.splice(productIndex, 1);
-    return res.status(200).json({
-        message: "Product deleted",
-        product: deletedProduct,
-    });
 };
