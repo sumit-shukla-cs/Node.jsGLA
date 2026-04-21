@@ -3,7 +3,6 @@ const app = express();
 
 app.use(express.json());
 
-// Health check route
 app.get('/test', (req, res) => {
   res.json({ message: "Server is working!" });
 });
@@ -12,7 +11,6 @@ app.get('/health', (req, res) => {
   res.json({ status: "OK" });
 });
 
-// Load and register routes with error handling
 try {
   const userRoutes = require("./routes/userRoutes");
   app.use("/users", userRoutes);

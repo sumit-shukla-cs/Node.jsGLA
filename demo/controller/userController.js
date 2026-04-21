@@ -17,7 +17,6 @@ exports.addUser = async (req, res) => {
     }
 
     try {
-        // Always let MongoDB generate the document id for new users.
         delete userData._id;
 
         const newUser = new User(userData);
@@ -39,5 +38,4 @@ exports.addUser = async (req, res) => {
     User.create(userMeta);
     res.send("User added successfully");
 }
-
 
