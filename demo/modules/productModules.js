@@ -9,5 +9,16 @@ const productSchema = new mongoose.Schema({
     quantity: Number,
 });
 
+// Pre-save hook
+productSchema.pre('save', function (next) {
+    console.log('Saving product...');
+    next();
+});
+
+// Post-save hook
+productSchema.post('save', function (doc) {
+    console.log('Product saved:', doc);
+});
+
 const Product = mongoose.model("Product", productSchema, "products");
 module.exports = Product;
