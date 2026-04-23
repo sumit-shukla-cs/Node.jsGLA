@@ -1,13 +1,15 @@
-const express = require('express');
+const express = require("express");
 const app = express();
+const db = require("./modules/db");
+db();
 
 app.use(express.json());
 
-app.get('/test', (req, res) => {
+app.get("/test", (req, res) => {
   res.json({ message: "Server is working!" });
 });
 
-app.get('/health', (req, res) => {
+app.get("/health", (req, res) => {
   res.json({ status: "OK" });
 });
 
