@@ -5,11 +5,9 @@ const schemaValidation=Joi.object({
     .required()
     .messages({
         "string.base":"Name should be a string",
-        "string.empty":"Name cannot be empty",
-        "any.required":"Name is required"
     }),
     mobile:Joi.number().required(),
-    
+
 
 });
 
