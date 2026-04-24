@@ -12,4 +12,19 @@ router.route('/')
   .post(userController.addUser);
 router.get('/:id', userController.getUserById);
 
+const validate = (schema)=>{
+  const {error} = schema.validate(req.body);
+  if(error){
+    res.status(400).json({error:error.details[0].message});
+  }else{
+    next();
+  }
+}
+router.post("/createUser",validate(schemaValidation),(req,res)=>{
+  res.json({
+    message:"User created successfully",
+    data:req.body
+  })
+});
+
 module.exports = router;
